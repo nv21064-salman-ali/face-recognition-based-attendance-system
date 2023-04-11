@@ -7,40 +7,54 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    
-    <title>Face Recognition Based Attendance System</title>
+
+    <title>Add User - Face Recognition Based Attendance System</title>
 </head>
-<body class="bg-light d-flex flex-column min-vh-100">
+<body class="bg-primary">
 
     <header class="container mt-3 mb-5 text-center">
-        <h1 class="display-4">Face Recognition Based Attendance System</h1>
+        <h1 class="display-4 text-white">Face Recognition Based Attendance System</h1>
     </header>
 
     {% if mess %}
     <p class="text-center fs-4 text-danger">{{ mess }}</p>
     {% endif %}
-
+    
     <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Home</a>
             <a class="nav-link" href="/add">Add User</a>
             <a class="nav-link" href="/start">Take Attendance</a>
+
         </div>
     </nav>
     <!-- End of Navigation bar -->
 
-    <div class="container text-center flex-grow-1 d-flex align-items-center justify-content-center">
-        <div>
-            <p class="fs-4">Welcome to the Face Recognition Based Attendance System!</p>
-            <p class="fs-5">Use the navigation bar to add new users or take attendance.</p>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 mt-5">
+                <h2 class="display-6 text-white mb-4">Add User</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/add" method="POST" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="newusername" class="form-label">Enter New User Name*</label>
+                                <input type="text" class="form-control" id="newusername" name="newusername" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="newuserid" class="form-label">Enter New User ID*</label>
+                                <input type="number" class="form-control" id="newuserid" name="newuserid" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add New User</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <footer class="text-center py-3 bg-dark text-white">
-        <p>&copy; 2023 Abdelrahman Khaled. All rights reserved.</p>
-    </footer>
-
-    <!-- Optional JavaScript -->
+        <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybB3S3InbFzY3qczAfD5f/6X5I9Njnwo6U4A6S4E6NMlW6y1D" crossorigin="anonymous"></script>
