@@ -37,9 +37,6 @@
           <h2 class="display-6 mb-4">Today's Attendance</h2>
           <div class="card">
             <div class="card-body">
-              <a href="/start" class="d-block mb-3">
-                <button type="submit" class="btn btn-dark w-100">Take Attendance</button>
-              </a>
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -47,6 +44,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">ID</th>
                     <th scope="col">Time</th>
+                    <th scope="col">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -56,6 +54,7 @@
                     <td>{{ names[i] }}</td>
                     <td>{{ rolls[i] }}</td>
                     <td>{{ times[i] }}</td>
+                    <td><a href="#">Delete</a><a href="#">  update</a></td>
                   </tr>
                   {% endfor %} {% endif %}
                 </tbody>

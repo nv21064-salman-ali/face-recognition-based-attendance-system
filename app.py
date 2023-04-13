@@ -237,6 +237,14 @@ def add():
     names,rolls,times,l = extract_attendance()    
     return render_template('addUser.html',names=names,rolls=rolls,times=times,l=l,totalreg=totalreg(),datetoday2=datetoday2) 
 
+@app.route('/admin', methods=['GET'])
+def admin():
+    if 'face_recognition_model.pkl' not in os.listdir('static'):
+        return render_template('home.html', totalreg=totalreg(), datetoday2=datetoday2, mess='There is no trained model in the static folder. Please add a new face to continue.')
+
+    names, rolls, times, l = extract_attendance()    
+    return render_template('admin.html', names=names, rolls=rolls, times=times, l=l, totalreg=totalreg(), datetoday2=datetoday2)
+
 
 #### Our main function which runs the Flask App
 if __name__ == '__main__':

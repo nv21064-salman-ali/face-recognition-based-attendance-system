@@ -1,0 +1,6 @@
+flask
+opencv-python-headless
+mysql-connector-python
+scikit-learn
+pandas
+joblib
