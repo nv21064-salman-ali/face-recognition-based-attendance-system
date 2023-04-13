@@ -11,11 +11,9 @@
 
     <title>Take Attendance - Face Recognition Based Attendance System</title>
   </head>
-  <body class="bg-primary">
+  <body class="bg-light">
     <header class="container mt-3 mb-5 text-center">
-      <h1 class="display-4 text-white">
-        Face Recognition Based Attendance System
-      </h1>
+      <h1 class="display-4">Face Recognition Based Attendance System</h1>
     </header>
 
     {% if mess %}
@@ -26,8 +24,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">Home</a>
-        <a class="nav-link" href="/add">Add User</a>
-        <a class="nav-link" href="/start">Take Attendance</a>
+        <a class="nav-link text-white" href="/add">Add User</a>
+        <a class="nav-link text-white" href="/start">Take Attendance</a>
       </div>
     </nav>
     <!-- End of Navigation bar -->
@@ -35,11 +33,11 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-8 mt-5">
-          <h2 class="display-6 text-white mb-4">Today's Attendance</h2>
+          <h2 class="display-6 mb-4">Today's Attendance</h2>
           <div class="card">
             <div class="card-body">
               <a href="/start" class="d-block mb-3">
-                <button type="submit" class="btn btn-primary w-100">Take Attendance</button>
+                <button type="submit" class="btn btn-dark w-100">Take Attendance</button>
               </a>
               <table class="table table-bordered table-striped">
                 <thead>
