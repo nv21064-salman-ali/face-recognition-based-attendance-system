@@ -15,3 +15,7 @@ Activating a virtual environment:
 ## Install the required packages:
 
 `pip install opencv-python flask numpy scikit-learn pandas joblib mysql-connector-python`
+
+## Run the app
+
+`python app.py`
