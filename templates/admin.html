@@ -54,7 +54,7 @@
                     <td>{{ names[i] }}</td>
                     <td>{{ rolls[i] }}</td>
                     <td>{{ times[i] }}</td>
-                    <td><a href="#">Delete</a><a href="#">  update</a></td>
+                    <td><a href="{{ url_for('delete', Roll=rolls[i]) }}" class="btn btn-danger">Delete</a><a href="#">  update</a></td>
                   </tr>
                   {% endfor %} {% endif %}
                 </tbody>

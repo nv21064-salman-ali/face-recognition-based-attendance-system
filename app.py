@@ -9,9 +9,13 @@ import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
 import joblib
+from flask import Flask, render_template, request, redirect, url_for, flash
+import mysql.connector
+import secrets
 
 #### Defining Flask App
 app = Flask(__name__)
+app.secret_key = secrets.token_hex(16)
 
 
 ### Connection to the MySQL Database
@@ -245,6 +249,20 @@ def admin():
     names, rolls, times, l = extract_attendance()    
     return render_template('admin.html', names=names, rolls=rolls, times=times, l=l, totalreg=totalreg(), datetoday2=datetoday2)
 
+@app.route('/delete/<int:Roll>', methods=['GET', 'POST'])
+def delete(Roll):
+    cur = None
+    try:
+        cur = mysql.cursor()
+        cur.execute("DELETE FROM attendance WHERE Roll = %s", [Roll])
+        mysql.commit()
+        flash('Record has been deleted successfully')
+    except Exception as e:
+        flash(f'Error deleting record: {str(e)}')
+    finally:
+        if cur is not None:
+            cur.close()
+    return redirect(url_for('home'))
 
 #### Our main function which runs the Flask App
 if __name__ == '__main__':
