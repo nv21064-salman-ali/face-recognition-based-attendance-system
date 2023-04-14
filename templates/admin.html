@@ -54,7 +54,7 @@
                     <td>{{ names[i] }}</td>
                     <td>{{ rolls[i] }}</td>
                     <td>{{ times[i] }}</td>
-                    <td><a href="#">Delete</a><a href="#">  update</a></td>
+                   <!-- salman edit--> <td><a href="/delete/{{Row.Roll}}" onclick="return confirm('Are you sure you want to delete student information ?')">Delete</a><a href="#">  update</a></td>
                   </tr>
                   {% endfor %} {% endif %}
                 </tbody>

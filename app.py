@@ -10,6 +10,10 @@ from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
 import joblib
 
+### Salman edit for determine the type of the flash and redirect functions for delete ### 
+from flask import Flask, render_template, request, redirect, url_for, flash
+### Salman edit for determine the type of the flash and redirect functions for delete ### 
+
 #### Defining Flask App
 app = Flask(__name__)
 
@@ -244,6 +248,17 @@ def admin():
 
     names, rolls, times, l = extract_attendance()    
     return render_template('admin.html', names=names, rolls=rolls, times=times, l=l, totalreg=totalreg(), datetoday2=datetoday2)
+
+
+    ####     Salman delete code edit     ###
+    
+@app.route('/delete/<string:Roll>', methods = ['GET'])
+def delete(Roll):
+    flash("Record Has Been Deleted Successfully")
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM attendance WHERE Roll=%s", (Roll,))
+    mysql.connection.commit()
+    return redirect(url_for('home'))
 
 
 #### Our main function which runs the Flask App
