@@ -48,22 +48,173 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {% if l %}{% for i in range(l) %}
-                  <tr>
+                <!-- {% for i in range(len(rows)) %}
+                  {% if rows[i] is not None %} -->
+                  {% if l %}
+                  {% for i in range(l) %} 
+                  <!-- <tr>
                     <th scope="row">{{ i+1 }}</th>
-                    <td>{{ names[i] }}</td>
-                    <td>{{ rolls[i] }}</td>
-                    <td>{{ times[i] }}</td>
-                    <td><a href="{{ url_for('delete', Roll=rolls[i]) }}" class="btn btn-danger">Delete</a><a href="#">  update</a></td>
+                    <td>{{ names[i]['Name']}}</td>
+                    <td>{{ rolls[i]['Roll']}}</td>
+                    <td>{{ dates[i]['Date']}}</td>
+                    <td>{{ times[i]['Time']}}</td>
+                    <td>
+                      <a href="{{ url_for('delete', Roll=rolls[i]) }}" class="btn btn-danger">Delete</a>
+                      <a href="{{ url_for('update_record', Roll=str(rolls[i])) }}" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ rolls[i] }}">Edit</a>
+                    </td>
                   </tr>
-                  {% endfor %} {% endif %}
+                  <!-- Modal 
+                  <div class="modal fade" id="editModal{{ rolls[i] }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="editModalLabel">Edit Record</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="{{ url_for('update_record', Roll=str(rolls[i])) }}" method="POST">
+                            <div class="form-group">
+                              <label for="name">Name</label>
+                              <input type="text" class="form-control" id="name" name="name" value="{{ names[i] }}">
+                            </div>
+                            <div class="form-group">
+                              <label for="roll">Roll</label>
+                              <input type="text" class="form-control" id="roll" name="roll" value="{{ rolls[i] }}">
+                            </div>
+                            <div class="form-group">
+                              <label for="time">Time</label>
+                              <input type="text" class="form-control" id="time" name="time" value="{{ times[i] }}">
+                            </div>
+
+                            <div class="form-group">
+                              <label for="date">Time</label>
+                              <input type="text" class="form-control" id="date" name="time" value="{{ date[i] }}">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                   Check if row is not None before accessing its properties                   
+                  </tbody>
+                  </table>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div> -->
+                  <tbody>
+                    {% for row in students %}
+                    <tr>
+                      <td>{{ names[i]['Name']}}</td>
+                      <td>{{ rolls[i]['Roll']}}</td>
+                      <td>{{ dates[i]['Date']}}</td>
+                      <td>{{ times[i]['Time']}}</td>
+                    <td>
+                        <a href="/update/{{row.0}}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
+                        <a href="/delete/{{ row.0 }}" onclick="return confirm('Are Sure Want To Deleted ?')" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="/delete/{{Roll=rolls[i]}}" onclick="return confirm('Are Sure Want To Deleted ?')" class="btn btn-danger">Delete</a>
+                        <a href="/update_record/{{Roll=rolls[i]}}"  class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ rolls[i] }}">Edit</a>
+                      </td>
+                    </td>
+                </tr>
+            
+            
+                    <!-- Enter New Student Modal -->
+                    <div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                   
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-primary" style="align-content: center;">Update Student Details</h5>    
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  
+                
+                                <div class="modal-body">
+                                    
+                                    <form action="{{ url_for('update')}}" method="POST">
+                                        <input type="hidden" name="id" value="{{row.0}}">
+                                        <div class="form-group">
+                                          <label>Full Name</label>
+                                          <input value="{{row.1}}" type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="Enter Full Name">
+                                        </div>
+                
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input value="{{row.2}}" type="text" name="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter Email">
+                                        </div>
+                
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input value="{{row.3}}" name="phone" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Phone Number">
+                                          </div>
+                
+                                          <button type="submit" class="btn btn-success mb-2">Update</button>
+                                     
+                                      </form>
+                
+                
+                                </div>
+                            </div>
+                        </div>
+                
+                    </div>
+                
+                
+                    <!-- End of Edit Student Modal -->
+            
+            
+            
+            
+                    {% endfor %}
                 </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            
+            </table>
+                        </div>
+                        <!-- Content ends here-->
+            
+            
+                        <div class="col-sm-2"></div>
+            
+                    </div>
+                </div>
+            
+             <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>    
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+            </body>
+            </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <footer class="text-center py-3 bg-dark text-white">
       <p>&copy; 2023 Abdelrahman Khaled. All rights reserved.</p>

@@ -1,3 +1,4 @@
+import MySQLdb
 import cv2
 import os
 from flask import Flask,request,render_template
@@ -12,11 +13,16 @@ import joblib
 from flask import Flask, render_template, request, redirect, url_for, flash
 import mysql.connector
 import secrets
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_mysqldb import MySQL
+import builtins
+
+
 
 #### Defining Flask App
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
-
+app.jinja_env.globals.update(str=str)
 
 ### Connection to the MySQL Database
 def connect_to_database():
@@ -166,6 +172,7 @@ def add_attendance(name):
 
     connection.close()
 
+
 ################## ROUTING FUNCTIONS #########################
 
 #### Our main page
@@ -263,6 +270,27 @@ def delete(Roll):
         if cur is not None:
             cur.close()
     return redirect(url_for('home'))
+
+@app.route('/update_record/<Roll>', methods=['GET', 'POST'])
+def update_record(Roll):
+    conn = MySQLdb.connect(host='localhost', user='python_user', passwd='NVTC@1234', db='attendance_db')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM attendance WHERE Roll = %s", [Roll])
+    row = cur.fetchone()
+    print(f'row: {row}')  # Debugging statement
+    if row is None:
+        flash('Record not found')
+        return redirect(url_for('home'))
+    if request.method == 'POST':
+        Name = request.form['name']
+        Time = request.form['time']
+        Date = request.form['date']
+        cur.execute("UPDATE attendance SET Name=%s, Time=%s, Date=%s WHERE Roll=%s", (Name, Time, Date, Roll))
+        conn.commit()
+        flash('Record has been updated successfully')
+        cur.execute("SELECT * FROM attendance WHERE Roll = %s", [Roll])
+        row = cur.fetchone()
+    return render_template('admin.html', row=row)
 
 #### Our main function which runs the Flask App
 if __name__ == '__main__':
